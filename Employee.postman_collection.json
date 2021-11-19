@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "af3ac02f-ec0f-4bc2-93b3-519a396b645f",
+		"name": "Employee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "SaveEmployee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"codeEmployeeEmp\", jsonData.code );\r",
+							"pm.environment.get(\"codeEmployeeEmp\");\r",
+							"var variable=pm.response.json();\r",
+							"\r",
+							"\r",
+							"// Verifying Variables, Success' Contents and HTTP Code\r",
+							"pm.test('Property variables are Present', function() {\r",
+							"\r",
+							"pm.expect(variable).to.have.property('success')\r",
+							"pm.expect(variable).to.have.property('id')\r",
+							"\r",
+							"// Verifying the contents of success\r",
+							"tests[\"Value success contains Successfully Saved\"]= jsonData.success == (\"Successfully Saved\");\r",
+							"\r",
+							"// Verifying Status Code 200\r",
+							"    pm.test(\"HTTP Code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenType}} {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"{{FirstName}}\",\r\n    \"middleName\": \"{{MiddleName}}\",\r\n    \"lastName\": \"{{LastName}}\",\r\n    \"code\": \"{{Code}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/employee/101",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"101"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "999",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EmployeeDetail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"codeEmployeeEmp\", jsonData.code );\r",
+							"pm.environment.get(\"codeEmployeeEmp\");\r",
+							"var variable=pm.response.json();\r",
+							"\r",
+							"\r",
+							"// Verifying Variables, Success' Contents and HTTP Code\r",
+							"pm.test('Property variables are Present', function() {\r",
+							"pm.expect(variable).to.have.property('success')\r",
+							"pm.expect(variable).to.have.property('id')\r",
+							"\r",
+							"// Verifying the contents of success\r",
+							"tests[\"Value success contains Successfully Saved\"]= jsonData.success == (\"Successfully Saved\");\r",
+							"\r",
+							"// Verifying Status Code 200\r",
+							"    pm.test(\"HTTP Code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenType}} {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"{{FirstName}}\",\r\n    \"middleName\": \"{{MiddleName}}\",\r\n    \"lastName\": \"{{LastName}}\",\r\n    \"id\": \"{{EmployeeID}}\",\r\n    \"code\": \"{{Code}}\",\r\n    \"fullName\": {{FullName}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/employee/101",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"101"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

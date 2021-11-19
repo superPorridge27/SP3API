@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "ecab100e-f92d-419f-b52a-5a13d5591c24",
+		"name": "Attendance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PunchIn",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var variable=pm.response.json();\r",
+							"pm.test('Property variables are present', function() {\r",
+							"pm.expect(variable).to.have.property('success')\r",
+							"pm.expect(variable).to.have.property('id')\r",
+							"\r",
+							"tests[\"Variable success contains Successfully Punched In\"]= jsonData.success == (\"Successfully Punched In\");\r",
+							"    pm.test(\"HTTP code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenType}} {{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"timezone\": \"Asia/Jakarta\",\r\n    \"note\": \"catatan\",\r\n    \"datetime\": \"2005-12-30 01:02\"\r\n}"
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/employee/2/punch-in",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"2",
+						"punch-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PunchOut",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var variable=pm.response.json();\r",
+							"pm.test('Property variables are present', function() {\r",
+							"pm.expect(variable).to.have.property('success')\r",
+							"pm.expect(variable).to.have.property('id')\r",
+							"\r",
+							"tests[\"Variable success contains Successfully Punched Out\"]= jsonData.success == (\"Successfully Punched Out\");\r",
+							"    pm.test(\"Status code is 200\", function () {\r",
+							"        pm.response.to.have.status(200);\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenType}} {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"timezone\": \"Asia/Jakarta\",\r\n    \"note\": \"catatan\",\r\n    \"datetime\": \"2005-12-30 01:02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/employee/2/punch-out",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employee",
+						"2",
+						"punch-out"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

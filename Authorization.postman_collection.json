@@ -1,0 +1,70 @@
+{
+	"info": {
+		"_postman_id": "f6646fe8-7b94-4d81-80ca-eb43a4d4fde9",
+		"name": "Authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "IssueToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "client_id",
+							"value": "key",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "key",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://qa.cilsy.id/symfony/web/index.php/oauth/issueToken",
+					"protocol": "http",
+					"host": [
+						"qa",
+						"cilsy",
+						"id"
+					],
+					"path": [
+						"symfony",
+						"web",
+						"index.php",
+						"oauth",
+						"issueToken"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "key",
+							"disabled": true
+						},
+						{
+							"key": "client_secret",
+							"value": "key",
+							"disabled": true
+						},
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

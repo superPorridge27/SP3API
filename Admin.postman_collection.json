@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "643ce15c-9eec-437c-a789-bd22782eb09d",
+		"name": "Admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetUsers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenType}} {{accessToken}}",
+						"description": "http://qa.cilsy.id/",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/api/v1/user",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserLogin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var variable=pm.response.json();\r",
+							"\r",
+							"pm.test('Property variables are present', function() {\r",
+							"pm.expect(variable).to.have.property('login')\r",
+							"pm.expect(variable.user).to.have.property('userName')\r",
+							"pm.expect(variable.user).to.have.property('userRole')\r",
+							"pm.expect(variable.user).to.have.property('status')\r",
+							"pm.expect(variable.user).to.have.property('employeeName')\r",
+							"pm.expect(variable.user).to.have.property('employeeId')\r",
+							"\r",
+							"tests[\"login contains true\"]= jsonData.login == true;\r",
+							"tests[\"userName contains Admin\"]= jsonData.user.userName == (\"Admin\");\r",
+							"tests[\"userRole contains Admin\"]= jsonData.user.userRole == (\"Admin\");\r",
+							"tests[\"status contains Enabled\"]= jsonData.user.status == (\"Enabled\");\r",
+							"tests[\"employeeName contains admin admin\"]= jsonData.user.employeeName == (\"admin admin\");\r",
+							"tests[\"employeeId contains 1\"]= jsonData.user.employeeId == (\"1\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenType}} {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Admin\",\r\n    \"password\": \"s3Kol4HQA!*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/v1/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrganizationInformation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"var variable=pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", () => {\r",
+							"  pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"\r",
+							"pm.test('Property variables are present', function() {\r",
+							"pm.expect(variable.data).to.have.property('id')\r",
+							"pm.expect(variable.data).to.have.property('name')\r",
+							"pm.expect(variable.data).to.have.property('taxId')\r",
+							"pm.expect(variable.data).to.have.property('registraionNumber')\r",
+							"pm.expect(variable.data).to.have.property('phone')\r",
+							"pm.expect(variable.data).to.have.property('fax')\r",
+							"pm.expect(variable.data).to.have.property('email')\r",
+							"pm.expect(variable.data).to.have.property('country')\r",
+							"pm.expect(variable.data).to.have.property('province')\r",
+							"pm.expect(variable.data).to.have.property('city')\r",
+							"pm.expect(variable.data).to.have.property('zipCode')\r",
+							"pm.expect(variable.data).to.have.property('street1')\r",
+							"pm.expect(variable.data).to.have.property('street2')\r",
+							"pm.expect(variable.data).to.have.property('note')\r",
+							"pm.expect(variable.data).to.have.property('numberOfEmployees')\r",
+							"\r",
+							"\r",
+							"tests[\"Variable id contains 1\"]= jsonData.data.id == (\"1\");\r",
+							"tests[\"Variable name contains Cilsy Fiolution\"]= jsonData.data.name == (\"Cilsy Fiolution\");\r",
+							"tests[\"Variable taxId contains null\"]= jsonData.data.taxId == null;\r",
+							"tests[\"Variable registraionNumber contains null\"]= jsonData.data.registraionNumber == null;\r",
+							"tests[\"Variable phone contains null\"]= jsonData.data.phone == null;\r",
+							"tests[\"Variable fax contains null\"]= jsonData.data.fax == null;\r",
+							"tests[\"Variable email contains null\"]= jsonData.data.email == null;\r",
+							"tests[\"Variable country contains ID\"]= jsonData.data.country == (\"ID\");\r",
+							"tests[\"Variable province contains null\"]= jsonData.data.province == null;\r",
+							"tests[\"Variable city contains null\"]= jsonData.data.city == null;\r",
+							"tests[\"Variable zipCode contains null\"]= jsonData.data.zipCode == null;\r",
+							"tests[\"Variable street1 contains null\"]= jsonData.data.street1 == null;\r",
+							"tests[\"Variable street2 contains null\"]= jsonData.data.street2 == null;\r",
+							"tests[\"Variable note contains null\"]= jsonData.data.note == null;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenType}} {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{URL}}/api/v1/organization",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"organization"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
